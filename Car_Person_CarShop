@@ -1,0 +1,108 @@
+
+
+function Person(name, car, personalNumber, isMale) {
+    if (typeof name === 'string' && name.trim() > 0) {
+        this.name = name;
+    }
+    this.car = (typeof car === 'object') ? car : null;
+    this.personalNumber = (personalNumber.length === 10 && typeof personalNumber === 'string') ?
+        personalNumber : '';
+    this.isMale = (typeof isMale === 'boolean') ? isMale : false;
+    this.money = 0;
+    this.friends = new Array(3);
+
+    this.buyCar = function (car) {
+        if (this.money >= car.price) {
+            this.money -= car.price;
+            this.car = car;
+            if (car.owner !== null) {
+                car.owner.car = null;
+                car.owner.money += car.price;
+            }
+            car.changeOwner(this);
+        } else {
+            console.log("you don't have enought money");
+        }
+    }
+
+    this.sellCarForScrap = function () {
+        var priceForScrap = this.car.calculateCarPriceForScrap(0.8);
+        this.money += priceForScrap;
+        this.car.owner = null;
+        this.car = null;
+        return this.money;
+    }
+}
+
+function Car(model, isSport, color) {
+    this.model = model;
+    this.isSport = isSport;
+    this.color = color;
+    this.price = 0;
+    this.owner = null;
+
+    this.isMoreExpensive = function (car) {
+        if (typeof car === 'object') {
+            return this.price > car.price;
+        }
+    }
+
+    this.calculateCarPriceForScrap = function (metalPrice) {
+        var coef = 0.2;
+        if (this.color === 'black' || this.color === 'white') {
+            coef += 0.05;
+        }
+        if (this.isSport) {
+            coef += 0.05;
+        }
+        return metalPrice * coef;
+    }
+    this.changeOwner = function (newOwner) {
+        if (typeof newOwner === 'object') {
+            this.owner = newOwner;
+        }
+    }
+}
+
+function CarShop(capacity) {
+    this.capacity = (capacity > 0) ? capacity : 0;
+    this.cars = new Array(capacity);
+    this.size = 0;
+    this.crrCar = 0;
+
+    this.addCar = function (car) {
+        if (this.size < this.capacity) {
+            this.cars[this.size] = car;
+            this.size++;
+        }
+    }
+
+    this.getNextCar = function () {
+        return this.cars[this.crrCar++];
+    }
+}
+
+var car1 = new Car('opel', false, 'black');
+car1.price = 20;
+var car2 = new Car('mini', true, 'red');
+car2.price = 10;
+
+var me = new Person('sevi',null, '1234567890', false);
+me.money=200;
+me.buyCar(car2);
+console.log(me.money);
+//console.log(me);
+
+
+
+// console.log(car2.isMoreExpensive(car1));
+// console.log(car1.calculateCarPriceForScrap(1));
+
+// var magazin = new CarShop(10);
+
+// magazin.addCar(car1);
+// magazin.addCar(car2);
+
+// //console.log(magazin.cars);
+// console.log(magazin.getNextCar());
+// console.log(magazin.getNextCar());
