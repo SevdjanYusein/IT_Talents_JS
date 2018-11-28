@@ -1,5 +1,4 @@
-
-
+//Person
 function Person(name, car, personalNumber, isMale) {
     if (typeof name === 'string' && name.trim() > 0) {
         this.name = name;
@@ -20,8 +19,10 @@ function Person(name, car, personalNumber, isMale) {
                 car.owner.money += car.price;
             }
             car.changeOwner(this);
+            return true;
         } else {
             console.log("you don't have enought money");
+            return false;
         }
     }
 
@@ -34,6 +35,8 @@ function Person(name, car, personalNumber, isMale) {
     }
 }
 
+
+//Car
 function Car(model, isSport, color) {
     this.model = model;
     this.isSport = isSport;
@@ -64,6 +67,8 @@ function Car(model, isSport, color) {
     }
 }
 
+
+//Car Shop
 function CarShop(capacity) {
     this.capacity = (capacity > 0) ? capacity : 0;
     this.cars = new Array(capacity);
@@ -80,29 +85,79 @@ function CarShop(capacity) {
     this.getNextCar = function () {
         return this.cars[this.crrCar++];
     }
+
+    this.sellNextCar = function (buyer) {
+        var nextCar = this.getNextCar();
+        if (buyer.buyCar(nextCar)) {
+            console.log("the car was sold");
+        }
+        this.removeCar(nextCar);
+    }
+
+    this.removeCar = function (car) {
+        var index = this.cars.indexOf(car);
+        this.cars.splice(index, 1);
+        this.size--;
+    }
+
+    this.printCar = function (car) {
+        // const printableFields=['model','color','price'];
+        // let displayedInfo='';
+        // printableFields.forEach(field=>{
+        //     displayedInfo+=car[field]+' ';
+        // })
+        // console.log(displayedInfo);
+
+        console.log(car.model + " " + car.color + " " + car.price);
+    }
+
+    this.showAllCarsInTheShop = function () {
+        this.cars.forEach(car => this.printCar(car));
+    }
+
+    this.mostExpensiveCar = function () {
+        var max = 0;
+        var maxIndex = 0;
+        for (let index = 0; index < this.size; index++) {
+            if (this.cars[index].price > max) {
+                max = this.cars[index].price;
+                maxIndex=index;
+            }
+        }
+        this.printCar(this.cars[maxIndex]);
+    }
+
 }
+
+
+
+//Test
 
 var car1 = new Car('opel', false, 'black');
 car1.price = 20;
 var car2 = new Car('mini', true, 'red');
 car2.price = 10;
 
-var me = new Person('sevi',null, '1234567890', false);
-me.money=200;
-me.buyCar(car2);
-console.log(me.money);
-//console.log(me);
-
-
+var me = new Person('sevi', null, '1234567890', false);
+me.money = 200;
+//me.buyCar(car2);
+//console.log(me.money);
 
 // console.log(car2.isMoreExpensive(car1));
 // console.log(car1.calculateCarPriceForScrap(1));
 
-// var magazin = new CarShop(10);
+var magazin = new CarShop(10);
 
-// magazin.addCar(car1);
-// magazin.addCar(car2);
+magazin.addCar(car1);
+magazin.addCar(car2);
 
-// //console.log(magazin.cars);
 // console.log(magazin.getNextCar());
 // console.log(magazin.getNextCar());
+
+// magazin.sellNextCar(me);
+// console.log(me);
+// console.log(magazin.cars);
+
+//magazin.showAllCarsInTheShop();
+
+magazin.mostExpensiveCar();
