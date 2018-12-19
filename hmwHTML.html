@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Add Emlpoyee</title>
+</head>
+
+<body>
+    <h1>Add Employee</h1>
+    <div>
+        First name: <input type="text" name="fname" maxlength="10" /> <br />
+        Last name: <input type="text" name="lname" maxlength="10" /> <br />
+        Title: <input type="text" name="title" maxlength="30" />
+    </div>
+    <div>
+        <label> Title of Courtesy: </label>
+        <input type="radio" name="courtesy" value="1" /> Dr.
+        <input type="radio" name="courtesy" value="2" checked /> Mr.
+        <input type="radio" name="courtesy" value="3" /> Mrs.
+        <input type="radio" name="courtesy" value="4" /> Ms.
+    </div>
+    <div>
+        Birth date: <input type="date" /> <br />
+        Hire date: <input type="date" />
+    </div>
+    <div>
+        Address: <input type="text" name="address" maxlength="40" /> <br />
+        City: <input type="text" name="city" maxlength="15" /> <br />
+        Region: <input type="text" name="region" maxlength="10" />
+    </div>
+    <div>
+        Postal Code: <input required name="postalCode" type="number" placeholder="Postal Code" value="10000" max="99999"
+            min="10000" maxlength="5" />
+    </div>
+    <div>
+        Country: <input type="text" name="country" maxlength="10" />
+    </div>
+    <div>
+        Home Phone: <input required type="tel" name="phone" maxlength="10" /> <br />
+        Extensiion: <input required type="tel" name="extension" maxlength="4" />
+    </div>
+    <div>
+        Notes: <br /><textarea name="notes" cols="50" rows="4"></textarea>
+    </div>
+    <div>
+        Manager:
+        <select name="manager">
+            <option value="0" selected disabled>Manager</option>
+            <option value="1">Andrew Fuller</option>
+            <option value="2">Mat Jamson</option>
+            <option value="3">Eric Pow</option>
+            <option value="4">Nicol Parks</option>
+            <option value="5">Jon Newman</option>
+        </select>
+    </div>
+    <div>
+        Password: <input required type="password" name="pass" maxlength="15" /> <br />
+        Repeat Password: <input required type="password" name="pass" maxlength="15" />
+    </div>
+    <div>
+        <input type="submit" value="Add Employee" />
+    </div>
+
+    <br />
+    <hr /> <br />
+ 
+    <table>
+        <caption>
+            <h1>Color Table</h1>
+        </caption>
+        <thead>
+            <tr>
+                <td>Hex Code</td>
+                <td>Color Name</td>
+            </tr>
+        </thead>
+        <tbody>
+            <script>
+                var code = ["#ffebcd", "#5f9ea0", "#deb887", "#556b2f", "#ff69b4", "#ffefd5"];
+                var color = ["BlanchedAlmond", "CadetBlue", "BurlyWood", "DarkOliveGreen", "HotPink", "PapayaWhip"];
+                for (let i = 0; i < code.length; i++) {
+                    document.write(`
+                    <tr bgcolor="${code[i]}" border="1">
+                        <td>${code[i]}</td>
+                        <td>${color[i]}</td>
+                    </tr>
+                    `)
+                }
+            </script>
+        </tbody>
+    </table>
+
+    <br />
+    <hr /> <br />
+
+</body>
+
+</html>
