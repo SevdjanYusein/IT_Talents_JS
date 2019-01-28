@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <img id="topche" src="topche.png" />
+
+    <script>
+        var img = document.getElementById('topche');
+        img.style.position = 'absolute';
+        img.style.width = '100px';
+        img.style.left = (window.innerWidth / 2 - 50) + "px";
+        var left = 0;
+        var down = 0;
+        var directionRL = 'right';
+        var directionUD = 'down';
+        var last = Date.now();
+
+        function moveBall() {
+            const VELOCITY = innerWidth / 2000;
+            var currentTime = Date.now();
+            var distance = (currentTime - last) * VELOCITY;
+
+            if (left > window.innerWidth - 100) {
+                directionRL = 'left';
+            }
+            if (down > window.innerHeight - 100) {
+                directionUD = 'top';
+            }
+            if (left < 0) {
+                directionRL = 'right';
+            }
+            if (down < 0) {
+                directionUD = "down";
+            }
+
+            if (directionRL === 'right') {
+                left += distance;
+            } else {
+                left -= distance;
+            }
+
+            if (directionUD === 'down') {
+                down += distance;
+            } else {
+                down -= distance;
+            }
+
+            img.style.left = left + "px";
+            img.style.top = down + "px";
+            last = Date.now();
+            requestAnimationFrame(moveBall);
+        }
+
+        requestAnimationFrame(moveBall);
+
+    </script>
+
+</body>
+
+</html>

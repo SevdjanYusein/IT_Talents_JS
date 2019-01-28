@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Supermen</title>
+
+    <style>
+        img {
+            position: relative;
+            margin-left: 40vw;
+            margin-top: 34vw;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="supermenn.png" width="200px" height="200px" id="supermen" /> 
+
+    <script>
+        var bottom = 0;
+        var img = document.querySelector("#supermen");
+
+        document.body.addEventListener('keydown', function (event) {
+            if (event.keyCode === 38) {
+                if (bottom < window.innerHeight - 200) {
+                    bottom += 10;
+                    img.style.bottom = bottom + 'px';
+
+                    img.style.transform = "rotate(0deg)";
+                }
+            }
+        }, false);
+
+        document.body.addEventListener('keydown', function (event) {
+            if (event.keyCode === 40) {
+                if (bottom > 0) {
+                    bottom -= 10;
+                    img.style.bottom = bottom + 'px';
+
+                    img.style.transform = "rotate(180deg)";
+                }
+            }
+        }, false);
+
+
+
+    </script>
+</body>
+
+</html>
